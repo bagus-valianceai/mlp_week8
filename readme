@@ -1,0 +1,34 @@
+How to replicate this service:
+1. Create project directory (e.g. called "mlp_week8")
+2. Create venv (e.g. called ".venv", remember the point in front of venv name makes venv directory invisible, use "ll" command to see all dir including hidden ones)
+3. Create 7 directories called "assets", "config", "data", "docker", "models", "reports", and "src"
+4. Create 2 more directories inside "data", that are "raw" and "processed"
+5. Create 2 more directories inside "docker", that are "api" and "streamlit"
+6. In the "assets" dir, place an image file called "banner.png" to be used in streamlit user interface, you could use any png file
+7. In the "config" dir, place a config file called "config.yaml", you could copy paste from notebook in pacmann's learning management system 
+8. In the "data/raw" dir, place the dataset, it is called "smoke_detection_iot.csv" and you could download it via part one of this course in pacmann's learning management system
+9. In the "docker" dir including its subdir "api" and "streamlit", place the docker file called "Dockerfile". It's same file name for "api" and "streamlit", this file should be created in live class
+10. In the "models" dir, there is should be a file called "production_model.pkl". This is the machine learning model that is generated after training model, if you just created this project and not training your model yet, this dir should be empty
+11. In the "reports" dir, a dir to place file that is correspond to reporting e.g. plotting image of dataset distribution, metrics, etc. This dir should be empty if you're not doing any exploratory data analysis
+12. In the "src" dir, 7 files should be presented and that are "util.py", "data_pipeline.py", "preprocessing.py", "modeling.py", unit_test.py", "api.py", and "streamlit.py". The "data_pipeline.py", "preprocessing.py", and "modeling.py" are created by converting jupyter notebook in the pacmann's learning management system to those python script. The "util.py" is copy paste from util.py used in previous jupyter notebook. The others are created in the live class
+13. In the project directory (e.g. "mlp_week8"), there are should be presented 5 files: "docker-compose.yaml", "readme" (this file), "requirements_be.txt" (list packages for api), "requirements_fe.txt" (list packages for streamlit), and ".gitignore". All of those file would be created during liveclass
+
+How to run this service:
+1. Make sure config file in "config" dir presented
+2. Make sure dataset in csv format is presented in "data/raw" dir
+3. Make sure venv has been activated
+4. Make sure venv has required packages
+5. Make sure docker file insed "docker/api" and "docker/streamlit" is presented
+6. Make sure "docker-compose.yaml" is presented in root of project dir
+7. Make sure "util.py", "data_pipeline.py", "preprocessing.py", "modeling.py", unit_test.py", "api.py", and "streamlit.py" are presented in "src" dir
+5. Run "data_pipeline.py" in "src" dir, few new files would be generated in "data/processed" dir
+6. Run "preprocessing.py" in "src" dir, few new files would be generated in "data/processed" dir
+7. Run "modeling.py" in "src" dir, a new file would be created in "models" dir.
+8. Run "docker-compose.yaml" to start api and streamlit so you could do a prediction
+9. Open web browser and navigate to localhost:8080 to check whether api endpoint is up, localhost:8080/docs to access api endpoint's docs, and localhost:8501 to access streamlit
+
+How to deploy this service to ec2:
+1. Initialize git in this project dir
+2. Add the venv dir and "src/__pycache__" to ".gitignore"
+3. Add large files e.g. dataset, train; validation; and test set, trained model, assets, etc. to git lfs by tracking those file using command "git lfs track [file_path_with_extension]"
+4. A new file called ".gitattributes" would be generated, track this file with git
