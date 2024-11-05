@@ -32,3 +32,12 @@ How to deploy this service to ec2:
 2. Add the venv dir and "src/__pycache__" to ".gitignore"
 3. Add large files e.g. dataset, train; validation; and test set, trained model, assets, etc. to git lfs by tracking those file using command "git lfs track [file_path_with_extension]"
 4. A new file called ".gitattributes" would be generated, track this file with git
+5. Track all files in this project dir using git
+6. Create online repository, e.g. in github
+7. Connect this project dir to those online repository
+8. Push the changes in this project dir to online repository
+9. Open online repository via web browser
+10. Access tab "Actions"
+11. Search for "python" and choose "Python application By Github Actions" by clicking the "Configure" button
+12. A new directory called ".github" and its sub directory called "workflows" would be generated, inside this directory would be presented a new file called "python-app.yml"
+13. Configure this by your need
