@@ -36,8 +36,31 @@ How to deploy this service to ec2:
 6. Create online repository, e.g. in github
 7. Connect this project dir to those online repository
 8. Push the changes in this project dir to online repository
+9. Getting started to CICD:
+CICD is done by github action, but before create github action we need to know the needs.
+There would be 2 jobs in github action:
+-. Docker compose build
+-. Docker pull ec2
+
+The docker compose build job would be building an docker image and push it to docker hub, this job requires:
+-. Docker hub user
+-. Docker hub token
+All those credentials should be stored in github secret
+
+The docker pull ec2 job would be creating ssh config file in github runner, establish ssh connection to ec2 instance, get the docker-compose.yaml file from online repo, pulling image and running the image. This job requires:
+-. SSH user (ec2 user account, if ubuntu it should be "ubuntu")
+-. SSH key (ec2 generated keypair when creating instance)
+-. SSH host (ec2 public ip, it would be change if ec2 instance restarted)
+All those credentials should be stored in github secret
+
 9. Open online repository via web browser
 10. Access tab "Actions"
 11. Search for "python" and choose "Python application By Github Actions" by clicking the "Configure" button
 12. A new directory called ".github" and its sub directory called "workflows" would be generated, inside this directory would be presented a new file called "python-app.yml"
-13. Configure this by your need
+13. The "python-app.yml" file would opened and it has a template in it, configure as follows:
+-. In the "jobs" section, it would be "build" job. change it to "docker-compose-build"
+-. Under the "uses: actions/checkout@v4", add following text "with:", gives enter and one tab, and give text "lfs: True"
+-. Delete all steps with "name" in it
+
+
+
